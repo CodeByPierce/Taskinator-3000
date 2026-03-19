@@ -3,7 +3,7 @@
 Tired of uninspired To-Do lists and personal schedules that never work out? You need Taskinator 3000!
 
 -Taskinator's Daily tasks let you easily setup recurring goals for you to acheive each day, and allows customizable weekly schedules!
--Taskinator's To-do tasks lets you easily empty your brain's contents a Todo list, and lets you set due dates and sort them later!
+-Taskinator's To-do tasks lets you easily empty your brain's contents to a Todo list, and lets you set due dates and sort them later!
 
 Just start up Taskinator and start creating tasks!
 
@@ -19,12 +19,13 @@ All your daily tasks persist forward in time, but not backwards (why would you w
 
 However, if you decide to delete a daily task, you can always go back and look at your progress on that task from the days before.
 
-To remove any task, just set the completion bar all the way to 0%, then click remove.
+To remove ANY task, just set the completion bar all the way to 0%, then click remove.
 
-Daily tasks stick around when they're done, so you can check on your progress over time.
+Daily tasks stick around when they're done, so you can look back on your progress over time.
 
 To Do tasks let you finish them when they hit 100%, so you can forget about them forever!
 
+Hit "In-Progress" so whats close to being done! You'll see already completed tasks and ones you havent started at the bottom. 
 *** INFO ***
 
 Created by Pierce Mayadag for code demo purposes, 3-19-26
