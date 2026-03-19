@@ -1,0 +1,20 @@
+After digging into QT, I've discovered that the QList Widget has built in drag and drop features already, score!
+
+I've completed all the .ui files in function and basic form (although not very pretty).
+I'm just going to try to use as much of the built-in QT stuff as I can for visual elements in the interest of time.
+With that in mind, individual TaskWindow, and daily and todo tab ui files have all been collapsed into the Mainwindow.ui, utilizing the existing tab widget and list widget.
+EnergyBar.ui has gone away, just going to try and use the existing progress bar.
+todoTask.ui and dailyTask.ui have come up though, as I forgot that I would need to create custom widget files for the tasks themselves.
+New UI file layout looks like:
+
+.
+├── dailyTask.ui
+├── mainwindow.ui
+└── todoTask.ui
+
+So, much more condensed than originally thought.
+
+Next up is to do some research on how C++ can handle an interact with JSON files, so I can take a stab at implementing the data management.
+For now, just thinking one data file, but this may expand if I make seperate classes for handling different JSON objects, we'll see.
+
+Then once that looks like it works, I'll work on the controller code which should connect the two and make all the magic happen.

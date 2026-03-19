@@ -1,0 +1,20 @@
+All done!
+
+Of course the super fancy battery cell progress bar, never came to fruition.
+
+Here's the list of things I would've added/fixed if I had more time:
+1. Better looking, fancier UI
+2. Code documentation
+3. More robust checks for data access, as well as methods to verify the assumptiona about the data that could be used periodically
+4. One known bug, if you make a daily task unavailable on every day of the week, it will stay in the database, but be unable to be removed
+5. Apparently, QListWidgets *sometimes* loose track of custom ItemWidgets during sorting, but I never ran into this.
+
+Regarding 3., as far as I'm aware, there's no way to corrupt the data from the UI, besides slowly inserting undeletable tasks as mentioned in 4. But the controller code makes use of the dataHandler in a pretty robust manner. Another programmer using the same DataHandler could certainly mess things up though.
+
+In terms of code design, biggest things to do differently would have been:
+1. to use a list view instead of QListWidget, as per 5, and some of the slightly hacky things I had to do to deal with custom widgets
+2. Make the DailyTask and TodoTask classes inherit from a generic super class, to reduce redundant code
+3. Maybe a little overzealous with const correctness, probably not really needed on ints ...
+
+Yes In-Progress is SUPPOSED to put the 100% below partially complete, but above 0%. The idea being:
+Almost Complete -> Started, But Not Complete -> Complete -> Haven't Started

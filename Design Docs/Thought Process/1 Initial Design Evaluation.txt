@@ -1,0 +1,96 @@
+Initial Design Evaluation
+
+After creating the mock up images of what I think the app will look like, here's what I'm thinking.
+
+The main window is pretty simple, consisting of two elements
+- The title
+- A two-tabbed sub-window
+
+Each of the two tabs has an upper area with various buttons and/or displays as well as a task display sub-window.
+- The task display window can probably be a generic interface shared between the two tabs, although the fields of each task are not exactly the same.
+
+The task rectangles themselves should be their own object as well. They each need their own separate "controller" files, one for Daily and one for To-Do, which can probably inherit from a generic superclass. Depending on what QT offers, they may each need their own Qt ui files as well.
+
+The battery bar will likely need to be it's own object, assuming Qt doesn't provide something of the sort. This can be generic between both tabs. You click a cell and the battery empties/fills up to and including that cell, then it has to send a signal somewhere to update to value of the underlying battery percentage. Probably looks like:
+
+Click Battery UI (sends a signal) -> Battery Controller File "Update Percentage" method	-> Data File "Update Data" method
+									-> Battery UI "Update Cell Fill" method
+
+Backend Data will be interesting. It would seem that the tasks themselves are the primary information being stored. Probably use JSON and local persistent storage. Here's a first shot at the data fields for each of the two task types:
+
+To-Do:
+Name: string
+Order: int
+Completion: int
+DueDate: string
+
+Hmm, it seems that the Daily Tab has a complex interaction of "what tasks there are", "what days a task occurs on", and "how complete a task is on a given day". So the daily tasks themselves are probably one dataset, and then the days for which a user has interacted are another data set. Then, what the daily tab looks like for a particular day can be reconstructed on-demand from those two datasets. Perhaps the order of the tasks in the window should also be stored separately. Also, I think tasks should persist forward in time, but not backwards. I.e, a task created on 3/17/2026 should be visible on all dates thereafter, but not before. So here's what I got:
+
+Daily Task:
+id: string
+Name: string
+Sunday: Boolean
+Monday: Boolean
+Tuesday: Boolean
+Wednesday: Boolean
+Thursday: Boolean
+Friday: Boolean
+Saturday: Boolean
+CreationDate: string
+
+Day:
+Date:
+Task Completion: { [taskId1 (string), completionValue1 (int)], [taskId2 (string), completionValue2 (int)] }
+
+Daily Order:
+order: [taskId1 (string), taskId2 (string), ... taskIdN(string)]
+
+Also, it dawns on me that I should probably redo the To-Do data design to mirror a similar structure. Having the order stored in each task makes updates really inefficient.
+
+Updated To-Do:
+id: string
+Name: string
+Completion: int
+DueDate: string
+
+ToDo Order:
+orderOrder:
+order: [taskId1 (string), taskId2 (string), ... taskIdN(string)]
+
+Also, deleting Daily Tasks should persist forward in time, but not backwards, so I'll need to track deletion date for those too:
+
+Updated Daily:
+Daily Task:
+id: string
+Name: string
+Sunday: Boolean
+Monday: Boolean
+Tuesday: Boolean
+Wednesday: Boolean
+Thursday: Boolean
+Friday: Boolean
+Saturday: Boolean
+CreationDate: String
+DeletionDate: String
+
+Then if DeletionDate <= Creation Date (although the less than case shouldn't happen), I can fully remove the task's data entry.
+
+Regarding the task window, the task objects within the window should be reorderable by drag'n'drop. I feel like Qt should have something to do that, probably time to start lookin into that.
+
+So probably file structure looks like:
+
+models/
+- data.cpp
+views/
+- Mainwindow.ui
+- DailyTab.ui
+- TodoTab.ui
+- TaskWindow.ui
+- EnergyBar.ui
+controllers/
+- DailyTab.cpp
+- TodoTab.cpp
+- TaskWindow.cpp
+- Task.cpp
+- TodoTask.cpp
+- DailyTask.cpp

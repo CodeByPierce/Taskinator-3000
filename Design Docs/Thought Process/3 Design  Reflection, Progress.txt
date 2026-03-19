@@ -1,0 +1,39 @@
+Basic data architecture and JSON interface is complete.
+Also, I was reminded of the fact that C++ uses header files seperate form the actual implementation files. 0_0
+Glad I remembered that before the interview, lol, cause I had forgotten. So anyway, that'll change my project structure.
+
+Ended up making a seperate JsonHandler for the structs that give a programtic interface for the JSON info, so that adds a couple more files as well.
+All 5 of the data designs I drafted in the Initial Design Evaluation have made their way into C++ structs, with the addition of two container structs, since all of the dailyTasks and todoTasks will each be read in form one file.
+All the logic to convert between JSON and Structs is in place, as part of the structs themselves.
+
+I still need to add some fancy methods that the controller classes will use to interact with the datahandler.
+The paradigm I'm thinking of is
+-readThing (return a const for read only operations)
+-setThing (to actually modifiy struct values, and consequnelty emit update signals for the UI)
+-getThingCopy (for when you need to make modifications to something like a list: modify the copy in place, then send it back through setThing)
+
+I'll also add some speacialty methods pertaining to the interface, such as "createTask" which will add the task to the underlying struct and also increment the "nextId" variable.
+
+I think I'll start working on one of the controller classes for now, and implement the data interaction functions as I need them.
+
+Updated file structure (predictions for the controllers folder)
+
+.
+├── controllers
+│   ├── dailyTask.cpp
+│   ├── dailyTask.h
+│   ├── mainwindow.cpp
+│   ├── mainwindow.h
+│   ├── todoTask.cpp
+│   └── todoTask.h
+├── models
+│   ├── DataHandler.cpp
+│   ├── DataHandler.h
+│   ├── JsonHandler.cpp
+│   └── JsonHandlers.h
+└── views
+    ├── dailyTask.ui
+    ├── mainwindow.ui
+    └── todoTask.ui
+
+Although it might be nice to seperate out each the dailyTab and todoTab into seperate files from mainwindow, as I had initially though of. We'll see.

@@ -1,0 +1,2 @@
+Starting to immerse myself in the paradigm of the tasks having values keyed across certain days.
+I'm at the point where looking at the data structure I came up with a couple days ago feels like uncovering relics of an ancient civilization.

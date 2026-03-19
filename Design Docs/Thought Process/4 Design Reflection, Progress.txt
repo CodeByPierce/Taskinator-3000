@@ -1,0 +1,46 @@
+Got the Todo Tab and Todo Tasks done from top to bottom!
+Only a couple small bugs which were discovered and resolved quickly.
+
+The underlying DataHandler worked like a charm, and implementing it's methods were easy as cake!
+I will say, that there isn't a lot of validation or error checking going on down there.
+That includes with file reading/writing, verifying data integrity on load, or when being modified.
+
+There are a couple assumptions being made about the data that aren't strictly enforced by DataHandler.
+The uniqueness of the ID's comes to mind as well as the fact that the list storing the ID's in order should have the same number of entries as the Map holding all the Tasks.
+
+Although, I haven't found anyway to exploit this in the UI from a user's point of view. Certainly the data is corruptable by programmers using the DataHandler.
+The limited read and set functions limit this though too.
+
+One thing that ended up being a bigger pain than expected was the listWidget.
+Turns out it doesn't really play well with using custom widgets as rows, although it kinda supports it.
+Had to do some mild to moderately hackey things to make that all work.
+Apparently, the listItems are not guranteed to stay attached to their widgets after sorts, although luckily that hasn't been a problem for me.
+In the future better to just use a list view.
+
+Just need to implement the Daily tab, which is similar but with the additional bonus of having different data per-day.
+Think the project file structure is about finalized:
+
+.
+├── controllers
+│   ├── dailytab.cpp
+│   ├── dailytab.h
+│   ├── dailytask.cpp
+│   ├── dailytask.h
+│   ├── mainwindow.cpp
+│   ├── mainwindow.h
+│   ├── todotab.cpp
+│   ├── todotab.h
+│   ├── todotask.cpp
+│   └── todotask.h
+├── models
+│   ├── DataHandler.cpp
+│   ├── DataHandler.h
+│   ├── JsonHandler.cpp
+│   └── JsonHandlers.h
+├── views
+│   ├── dailytab.ui
+│   ├── dailytask.ui
+│   ├── mainwindow.ui
+│   ├── todotab.ui
+│   └── todotask.ui
+└── main.cpp
