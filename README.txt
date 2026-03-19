@@ -2,7 +2,7 @@
 
 Tired of uninspired To-Do lists and personal schedules that never work out? You need Taskinator 3000!
 
--Taskinator's Daily tasks let you easily setup recurring goal for you to acheive each day, and allows customizable weekly schedules!
+-Taskinator's Daily tasks let you easily setup recurring goals for you to acheive each day, and allows customizable weekly schedules!
 -Taskinator's To-do tasks lets you easily empty your brain's contents a Todo list, and lets you set due dates and sort them later!
 
 Just start up Taskinator and start creating tasks!
